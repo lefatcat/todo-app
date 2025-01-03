@@ -3,12 +3,12 @@ import Todo from "./Todo";
 const Todos = ({ todos }: Props) => {
   console.log("hola", todos);
   return (
-    <ul>
+    <ul className="border rounded-b-2xl p-4">
       {todos.map((todo: Todos) => {
         return (
           <li
             key={todo.id}
-            className={`${todo.complete ? "bg-amber-900" : "bg-amber-200"}`}
+            className={`rounded-2xl ${todo.complete ? "bg-red-100 " : "white"}`}
           >
             <Todo
               key={todo.id}

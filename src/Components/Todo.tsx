@@ -1,8 +1,16 @@
+import { useState } from "react";
 import { type Todos } from "../modules/types";
 
 const Todo: React.FC<Todos> = ({ id, title, complete }) => {
+  const [isHovered, setIsHovered] = useState(false);
   return (
-    <div className="flex items-center space-x-3">
+    <div
+      className={`flex h-10 justify-between items-center space-x-3 px-1 ${
+        isHovered && !complete && "bg-gray-100"
+      }`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       {/* Checkbox personalizado */}
       <label className="flex items-center space-x-2">
         <input
@@ -13,19 +21,38 @@ const Todo: React.FC<Todos> = ({ id, title, complete }) => {
         />
         <span
           className="w-6 h-6 inline-block rounded-full border border-gray-300 bg-white 
-          peer-checked:bg-blue-600 peer-checked:border-blue-600"
+          peer-checked:bg-green-100 peer-checked:border-green-100"
         ></span>
       </label>
 
       {/* Título */}
-      <label className="text-gray-700">{title}</label>
+      <label
+        className={`${
+          complete ? "text-gray-500 line-through italic" : "text-gray-700"
+        }`}
+      >
+        {title}
+      </label>
 
       {/* Botón */}
       <button
-        className="Destroy px-2 py-1 text-white bg-red-500 rounded hover:bg-red-600"
+        aria-label="Eliminar tarea"
+        className={`
+          px-2 
+          text-black 
+          transition-all 
+          duration-200 
+          ease-in-out
+          ${complete ? "opacity-70" : "opacity-0"}
+          ${
+            !complete &&
+            isHovered &&
+            "opacity-100 hover:bg-red-100 rounded-full"
+          }
+        `}
         onClick={() => {}}
       >
-        x
+        X
       </button>
     </div>
   );

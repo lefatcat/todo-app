@@ -30,9 +30,17 @@ import Todos from "./Components/Todos";
 
 function App() {
   const [todos, setTodos] = useState(mockTodos);
+
+  const handleRemove = (id: number) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
   return (
     <>
-      <Todos todos={todos} />
+      <div className="h-screen w-full flex justify-center items-center">
+        <div className="container flex justify-center items-center">
+          <Todos todos={todos} />
+        </div>
+      </div>
     </>
   );
 }
