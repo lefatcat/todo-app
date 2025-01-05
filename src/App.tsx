@@ -34,11 +34,25 @@ function App() {
   const handleRemove = (id: number) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
+
+  const handleCompleted = (id: number, completed: boolean) => {
+    const newTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, complete: completed };
+      }
+      return todo;
+    });
+    setTodos(newTodos);
+  };
   return (
     <>
       <div className="h-screen w-full flex justify-center items-center">
         <div className="container flex justify-center items-center">
-          <Todos todos={todos} />
+          <Todos
+            todos={todos}
+            onRemoveTodos={handleRemove}
+            onCompleteTodos={handleCompleted}
+          />
         </div>
       </div>
     </>
